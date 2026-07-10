@@ -16,6 +16,8 @@ import {
   typeById,
   footprintSize,
   uid,
+  SUPPLY_VOLTAGE,
+  BASIC_SUPPLY_MA,
 } from "./constants.js";
 
 export default function App() {
@@ -232,6 +234,10 @@ export default function App() {
 
   const popupConn = popup ? connections.find((c) => c.id === popup.connId) : null;
 
+  const totalMA = placed.reduce((sum, p) => sum + (typeById(p.typeId)?.mA ?? 0), 0);
+  const totalWatts = (totalMA / 1000) * SUPPLY_VOLTAGE;
+  const powerLevel = totalMA >= BASIC_SUPPLY_MA ? "over" : totalMA >= BASIC_SUPPLY_MA * 0.7 ? "caution" : "ok";
+
   const pathString = (conn, i) => {
     const centered = i - (connections.length - 1) / 2;
     const laneOffset = centered * LANE_STEP;
@@ -292,6 +298,7 @@ export default function App() {
               <div className="palette-bar" style={{ background: t.accent }} />
               <div className="palette-name">{t.name}</div>
               <div className="palette-sub">{t.sub}</div>
+              <div className="palette-ma">~{t.mA} mA</div>
             </div>
           ))}
         </div>
@@ -367,6 +374,7 @@ export default function App() {
                   </div>
                   <div className="pedal-name">{type.name}</div>
                   <div className="pedal-sub">{type.sub}</div>
+                  <div className="pedal-ma">~{type.mA} mA</div>
 
                   <div className="jack-wrap jack-left" ref={(el) => setJackRef(jackKey(p.id, "in"), el)}>
                     <JackButton label="IN" state={jackState(jackKey(p.id, "in"))} onClick={onJackClick(p.id, "in")} />
@@ -449,6 +457,35 @@ export default function App() {
             <div className="palette-name">{ghostType.name}</div>
             <div className="palette-sub">{ghostType.sub}</div>
           </div>
+        </div>
+      )}
+
+      {placed.length > 0 && (
+        <div className="power-panel">
+          <div className="patch-title">POWER BUDGET (9V DAISY CHAIN ESTIMATE)</div>
+          <div className="power-total">
+            <span className="power-total-value">
+              {totalMA} mA <span className="power-total-w">(~{totalWatts.toFixed(2)} W at {SUPPLY_VOLTAGE}V)</span>
+            </span>
+            <span className={`power-badge power-${powerLevel}`}>
+              {powerLevel === "ok" && "OK on a basic daisy chain"}
+              {powerLevel === "caution" && "Near a basic supply's limit"}
+              {powerLevel === "over" && "Too much for a basic daisy chain"}
+            </span>
+          </div>
+          <div className="power-bar-track">
+            <div
+              className={`power-bar-fill power-${powerLevel}`}
+              style={{ width: `${Math.min(100, (totalMA / BASIC_SUPPLY_MA) * 100)}%` }}
+            />
+          </div>
+          <p className="power-note">
+            Estimated from typical published current draw per pedal category — analog pedals (overdrive, fuzz,
+            compressor) sip very little, while digital time-based effects (delay, reverb) draw much more. A basic
+            single-output 9V "daisy chain" supply is usually rated around {BASIC_SUPPLY_MA} mA total; once you're
+            near or over that, or mixing analog with digital, an isolated multi-output supply avoids sag and noise.
+            Always check the rating printed on your actual pedal before powering it for real.
+          </p>
         </div>
       )}
 

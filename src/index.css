@@ -82,16 +82,16 @@ html, body, #root { margin: 0; padding: 0; }
 .pedal-remove { position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; border-radius: 50%; background: #21251c; border: 1px solid #3d4432; color: #b7bfab; font-size: 13px; line-height: 1; cursor: pointer; z-index: 3; }
 .pedal-remove:hover { color: #c9714a; border-color: #c9714a; }
 
-.jack-wrap { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px; z-index: 2; }
-.jack-left { left: -14px; }
-.jack-right { right: -14px; }
+.jack-wrap { position: absolute; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: center; gap: 1px; z-index: 2; }
+.jack-left { left: -19px; }
+.jack-right { right: -19px; }
 
-.jack-btn { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #14150f; background: radial-gradient(circle at 35% 30%, #d1d5c9, #83887a 60%, #4a4e42 100%); cursor: pointer; padding: 0; transition: box-shadow .15s ease, transform .15s ease; }
+.jack-btn { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid #14150f; background: radial-gradient(circle at 35% 30%, #d1d5c9, #83887a 60%, #4a4e42 100%); cursor: pointer; padding: 0; transition: box-shadow .15s ease, transform .15s ease; }
 .jack-btn:hover { transform: scale(1.08); }
-.jack-btn.connected { background: radial-gradient(circle at 35% 30%, #ffeaa9, #c9a227 55%, #8a6c17 100%); box-shadow: 0 0 9px 3px rgba(230,198,94,0.5); }
-.jack-btn.selected { animation: pulse 0.9s ease-in-out infinite; box-shadow: 0 0 0 5px rgba(230,198,94,0.32); }
+.jack-btn.connected { background: radial-gradient(circle at 35% 30%, #ffeaa9, #c9a227 55%, #8a6c17 100%); box-shadow: 0 0 7px 2px rgba(230,198,94,0.5); }
+.jack-btn.selected { animation: pulse 0.9s ease-in-out infinite; box-shadow: 0 0 0 4px rgba(230,198,94,0.32); }
 .jack-btn.error { background: radial-gradient(circle at 35% 30%, #ffb3a6, #c94a2f 60%, #7a2313 100%) !important; animation: shake 0.4s ease; }
-.jack-label { font-family: 'IBM Plex Mono', monospace; font-size: 8px; letter-spacing: 0.06em; color: #aeb6a1; }
+.jack-label { font-family: 'IBM Plex Mono', monospace; font-size: 6.5px; letter-spacing: 0.05em; color: #aeb6a1; }
 .anchor-box.amp .jack-label { color: #b9c0ad; }
 
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
@@ -118,3 +118,21 @@ html, body, #root { margin: 0; padding: 0; }
 .patch-remove { margin-left: auto; background: none; border: none; color: #8d9480; font-size: 15px; cursor: pointer; line-height: 1; padding: 2px 6px; }
 .patch-remove:hover { color: #c9714a; }
 .patch-empty { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6f7565; padding: 8px 2px; }
+
+.palette-ma { font-family: 'IBM Plex Mono', monospace; font-size: 6.5px; color: #7a8f6a; margin-top: 2px; }
+.pedal-ma { font-family: 'IBM Plex Mono', monospace; font-size: 6px; color: #8fa07f; margin-top: 1px; text-align: center; }
+
+.power-panel { max-width: 560px; margin: 26px auto 0; background: rgba(0,0,0,0.18); border: 1px solid #333a2c; border-radius: 8px; padding: 14px 16px; }
+.power-total { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.power-total-value { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 18px; color: #f2eddc; }
+.power-total-w { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a9b09a; font-weight: 400; }
+.power-badge { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.03em; padding: 3px 8px; border-radius: 4px; }
+.power-badge.power-ok { color: #a8d98a; background: rgba(127,174,79,0.15); border: 1px solid #5a7a3f; }
+.power-badge.power-caution { color: #e6c65c; background: rgba(230,198,94,0.12); border: 1px solid #8a7530; }
+.power-badge.power-over { color: #f0a08a; background: rgba(201,74,47,0.15); border: 1px solid #8a3a25; }
+.power-bar-track { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.power-bar-fill { height: 100%; border-radius: 3px; transition: width .25s ease; }
+.power-bar-fill.power-ok { background: #7fae4f; }
+.power-bar-fill.power-caution { background: #e6c65c; }
+.power-bar-fill.power-over { background: #c94a2f; }
+.power-note { font-size: 11px; color: #939a86; line-height: 1.5; margin: 10px 0 0; }

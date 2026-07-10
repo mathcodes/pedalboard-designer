@@ -1,16 +1,25 @@
-// Dimensions (inches, W x D as footprint on a board) and knob counts are drawn from
-// typical/representative compact pedals in each category — no brand names, just the
-// real proportions and control counts common to that style of pedal.
+// Dimensions (inches, W x D as footprint on a board), knob counts, and current draw (mA
+// at 9V) are drawn from typical/representative compact pedals in each category — no
+// brand names, just the real proportions, control counts, and power specs common to
+// that style of pedal. Current draw is a rough category average from published specs
+// (simple analog circuits draw very little; digital time-based effects draw much more)
+// — always check the rating printed on your actual pedal before powering it for real.
 export const PEDAL_TYPES = [
-  { id: "overdrive", name: "OVERDRIVE", sub: "DRIVE / GAIN", accent: "#d4af37", widthIn: 2.9, depthIn: 5.1, knobs: 3 },
-  { id: "distortion", name: "DISTORTION", sub: "CRUNCH", accent: "#c9714a", widthIn: 2.9, depthIn: 5.1, knobs: 3 },
-  { id: "fuzz", name: "FUZZ", sub: "VINTAGE", accent: "#9a5a86", widthIn: 4.5, depthIn: 6.3, knobs: 3 },
-  { id: "compressor", name: "COMPRESSOR", sub: "DYNAMICS", accent: "#a8453a", widthIn: 2.25, depthIn: 4.25, knobs: 2 },
-  { id: "chorus", name: "CHORUS", sub: "MODULATION", accent: "#4a72a8", widthIn: 2.75, depthIn: 4.9, knobs: 2 },
-  { id: "delay", name: "DELAY", sub: "ECHO / TIME", accent: "#d9973f", widthIn: 3.5, depthIn: 4.8, knobs: 3 },
-  { id: "reverb", name: "REVERB", sub: "SPACE / AMBIENCE", accent: "#3f9c8f", widthIn: 2.9, depthIn: 5.1, knobs: 3 },
-  { id: "tremolo", name: "TREMOLO", sub: "PULSE", accent: "#5a9a5a", widthIn: 2.9, depthIn: 5.1, knobs: 3 },
+  { id: "overdrive", name: "OVERDRIVE", sub: "DRIVE / GAIN", accent: "#d4af37", widthIn: 2.9, depthIn: 5.1, knobs: 3, mA: 15 },
+  { id: "distortion", name: "DISTORTION", sub: "CRUNCH", accent: "#c9714a", widthIn: 2.9, depthIn: 5.1, knobs: 3, mA: 18 },
+  { id: "fuzz", name: "FUZZ", sub: "VINTAGE", accent: "#9a5a86", widthIn: 4.5, depthIn: 6.3, knobs: 3, mA: 10 },
+  { id: "compressor", name: "COMPRESSOR", sub: "DYNAMICS", accent: "#a8453a", widthIn: 2.25, depthIn: 4.25, knobs: 2, mA: 10 },
+  { id: "chorus", name: "CHORUS", sub: "MODULATION", accent: "#4a72a8", widthIn: 2.75, depthIn: 4.9, knobs: 2, mA: 20 },
+  { id: "delay", name: "DELAY", sub: "ECHO / TIME", accent: "#d9973f", widthIn: 3.5, depthIn: 4.8, knobs: 3, mA: 80 },
+  { id: "reverb", name: "REVERB", sub: "SPACE / AMBIENCE", accent: "#3f9c8f", widthIn: 2.9, depthIn: 5.1, knobs: 3, mA: 80 },
+  { id: "tremolo", name: "TREMOLO", sub: "PULSE", accent: "#5a9a5a", widthIn: 2.9, depthIn: 5.1, knobs: 3, mA: 20 },
 ];
+
+// Volts assumed for the wattage estimate — the near-universal standard for compact pedals.
+export const SUPPLY_VOLTAGE = 9;
+// Rough capacity of a basic single-output 9V "wall wart" daisy-chain supply, in mA —
+// the common reference point players use to ask "can I daisy-chain these two?"
+export const BASIC_SUPPLY_MA = 300;
 
 const MAX_FOOTPRINT = Math.max(...PEDAL_TYPES.map((t) => t.widthIn * t.depthIn));
 const MIN_SCALE = 0.62;
