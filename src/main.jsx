@@ -8,3 +8,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <App />
   </React.StrictMode>
 );
+ls -la ~/Desktop/pedalboard-designer/.github/workflows/
