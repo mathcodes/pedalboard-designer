@@ -297,51 +297,6 @@ export default function App() {
       </div>
 
       <div className="stage" ref={stageRef}>
-        <svg className="wire-svg">
-          {connections.map((conn, i) => {
-            const d = pathString(conn, i);
-            if (!d) return null;
-            return (
-              <g key={conn.id}>
-                <path
-                  d={d}
-                  stroke="transparent"
-                  strokeWidth="20"
-                  fill="none"
-                  strokeLinejoin="round"
-                  style={{ pointerEvents: "auto", cursor: "pointer" }}
-                  onClick={onWireClick(conn)}
-                />
-                <path d={d} stroke="#0b0c09" strokeWidth="7" fill="none" strokeLinejoin="miter" />
-                <path
-                  d={d}
-                  stroke={conn.color}
-                  strokeWidth="3.5"
-                  fill="none"
-                  strokeLinejoin="miter"
-                  style={{ pointerEvents: "none" }}
-                />
-                <circle
-                  cx={positions[conn.fromKey]?.x}
-                  cy={positions[conn.fromKey]?.y}
-                  r="5"
-                  fill={conn.color}
-                  stroke="#0b0c09"
-                  strokeWidth="1.5"
-                />
-                <circle
-                  cx={positions[conn.toKey]?.x}
-                  cy={positions[conn.toKey]?.y}
-                  r="5"
-                  fill={conn.color}
-                  stroke="#0b0c09"
-                  strokeWidth="1.5"
-                />
-              </g>
-            );
-          })}
-        </svg>
-
         <div className="rig-header">
           <div className="anchor-box guitar">
             <div className="guitar-glyph-wrap">
@@ -420,6 +375,51 @@ export default function App() {
             );
           })}
         </div>
+
+        <svg className="wire-svg">
+          {connections.map((conn, i) => {
+            const d = pathString(conn, i);
+            if (!d) return null;
+            return (
+              <g key={conn.id}>
+                <path
+                  d={d}
+                  stroke="transparent"
+                  strokeWidth="20"
+                  fill="none"
+                  strokeLinejoin="round"
+                  style={{ pointerEvents: "auto", cursor: "pointer" }}
+                  onClick={onWireClick(conn)}
+                />
+                <path d={d} stroke="#0b0c09" strokeWidth="7" fill="none" strokeLinejoin="miter" />
+                <path
+                  d={d}
+                  stroke={conn.color}
+                  strokeWidth="3.5"
+                  fill="none"
+                  strokeLinejoin="miter"
+                  style={{ pointerEvents: "none" }}
+                />
+                <circle
+                  cx={positions[conn.fromKey]?.x}
+                  cy={positions[conn.fromKey]?.y}
+                  r="5"
+                  fill={conn.color}
+                  stroke="#0b0c09"
+                  strokeWidth="1.5"
+                />
+                <circle
+                  cx={positions[conn.toKey]?.x}
+                  cy={positions[conn.toKey]?.y}
+                  r="5"
+                  fill={conn.color}
+                  stroke="#0b0c09"
+                  strokeWidth="1.5"
+                />
+              </g>
+            );
+          })}
+        </svg>
 
         {popup && popupConn && (
           <div className="wire-popup" style={{ left: popup.x, top: popup.y }} onClick={(e) => e.stopPropagation()}>
