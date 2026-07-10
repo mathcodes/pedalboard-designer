@@ -297,67 +297,25 @@ export default function App() {
       </div>
 
       <div className="stage" ref={stageRef}>
-        <svg className="wire-svg">
-          {connections.map((conn, i) => {
-            const d = pathString(conn, i);
-            if (!d) return null;
-            return (
-              <g key={conn.id}>
-                <path
-                  d={d}
-                  stroke="transparent"
-                  strokeWidth="20"
-                  fill="none"
-                  strokeLinejoin="round"
-                  style={{ pointerEvents: "auto", cursor: "pointer" }}
-                  onClick={onWireClick(conn)}
-                />
-                <path d={d} stroke="#0b0c09" strokeWidth="7" fill="none" strokeLinejoin="miter" />
-                <path
-                  d={d}
-                  stroke={conn.color}
-                  strokeWidth="3.5"
-                  fill="none"
-                  strokeLinejoin="miter"
-                  style={{ pointerEvents: "none" }}
-                />
-                <circle
-                  cx={positions[conn.fromKey]?.x}
-                  cy={positions[conn.fromKey]?.y}
-                  r="5"
-                  fill={conn.color}
-                  stroke="#0b0c09"
-                  strokeWidth="1.5"
-                />
-                <circle
-                  cx={positions[conn.toKey]?.x}
-                  cy={positions[conn.toKey]?.y}
-                  r="5"
-                  fill={conn.color}
-                  stroke="#0b0c09"
-                  strokeWidth="1.5"
-                />
-              </g>
-            );
-          })}
-        </svg>
-
         <div className="rig-header">
           <div className="anchor-box guitar">
             <div className="guitar-glyph-wrap">
               <GuitarGlyph />
             </div>
             <div className="anchor-name">GUITAR</div>
-            <div className="anchor-sub">SOLIDBODY</div>
+            <div className="anchor-sub">FLAME MAPLE</div>
             <div className="anchor-jack" ref={(el) => setJackRef(jackKey("guitar", "out"), el)}>
               <JackButton label="OUT" state={jackState(jackKey("guitar", "out"))} onClick={onJackClick("guitar", "out")} />
               <span className="jack-label">OUT</span>
             </div>
           </div>
           <div className="anchor-box amp">
+            <div className="amp-panel">
+              <div className="amp-jewel" />
+            </div>
             <div className="amp-grille" />
             <div className="anchor-name">AMPLIFIER</div>
-            <div className="anchor-sub">TUBE COMBO</div>
+            <div className="anchor-sub">BLACKFACE COMBO</div>
             <div className="anchor-jack" ref={(el) => setJackRef(jackKey("amp", "in"), el)}>
               <JackButton label="IN" state={jackState(jackKey("amp", "in"))} onClick={onJackClick("amp", "in")} />
               <span className="jack-label">IN</span>
@@ -420,6 +378,51 @@ export default function App() {
             );
           })}
         </div>
+
+        <svg className="wire-svg">
+          {connections.map((conn, i) => {
+            const d = pathString(conn, i);
+            if (!d) return null;
+            return (
+              <g key={conn.id}>
+                <path
+                  d={d}
+                  stroke="transparent"
+                  strokeWidth="20"
+                  fill="none"
+                  strokeLinejoin="round"
+                  style={{ pointerEvents: "auto", cursor: "pointer" }}
+                  onClick={onWireClick(conn)}
+                />
+                <path d={d} stroke="#0b0c09" strokeWidth="7" fill="none" strokeLinejoin="miter" />
+                <path
+                  d={d}
+                  stroke={conn.color}
+                  strokeWidth="3.5"
+                  fill="none"
+                  strokeLinejoin="miter"
+                  style={{ pointerEvents: "none" }}
+                />
+                <circle
+                  cx={positions[conn.fromKey]?.x}
+                  cy={positions[conn.fromKey]?.y}
+                  r="5"
+                  fill={conn.color}
+                  stroke="#0b0c09"
+                  strokeWidth="1.5"
+                />
+                <circle
+                  cx={positions[conn.toKey]?.x}
+                  cy={positions[conn.toKey]?.y}
+                  r="5"
+                  fill={conn.color}
+                  stroke="#0b0c09"
+                  strokeWidth="1.5"
+                />
+              </g>
+            );
+          })}
+        </svg>
 
         {popup && popupConn && (
           <div className="wire-popup" style={{ left: popup.x, top: popup.y }} onClick={(e) => e.stopPropagation()}>

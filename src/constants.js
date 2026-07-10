@@ -11,8 +11,8 @@ export const PEDAL_TYPES = [
 
 export const NUM_COLS = 4;
 export const NUM_ROWS = 3;
-export const COL_GAP = 24;
-export const ROW_GAP = 30;
+export const COL_GAP = 44;
+export const ROW_GAP = 56;
 export const CELL_H = 92;
 export const HEADER_GAP = 60;
 export const CABLE_COLORS = ["#c9a227", "#4f9d92", "#9a5a86", "#c9714a", "#7a8fc9", "#7a9a5a"];
