@@ -14,6 +14,7 @@ import {
   LANE_STEP,
   jackKey,
   typeById,
+  footprintSize,
   uid,
 } from "./constants.js";
 
@@ -341,6 +342,7 @@ export default function App() {
           {placed.map((p) => {
             const type = typeById(p.typeId);
             const isDragging = drag && drag.mode === "move" && drag.instanceId === p.id;
+            const { w: boxW, h: boxH } = footprintSize(type, cellW, CELL_H);
             return (
               <div
                 key={p.id}
@@ -348,7 +350,7 @@ export default function App() {
                 style={{ left: p.col * (cellW + COL_GAP), top: p.row * (CELL_H + ROW_GAP), width: cellW, height: CELL_H }}
                 onPointerDown={beginDrag({ mode: "move", instanceId: p.id })}
               >
-                <div className="pedal-box">
+                <div className="pedal-box" style={{ width: boxW, height: boxH }}>
                   <button
                     className="pedal-remove"
                     onPointerDown={(e) => e.stopPropagation()}
@@ -359,8 +361,9 @@ export default function App() {
                   </button>
                   <div className="pedal-accent" style={{ background: type.accent }} />
                   <div className="knob-row">
-                    <Knob accent={type.accent} />
-                    <Knob accent={type.accent} />
+                    {Array.from({ length: type.knobs }).map((_, k) => (
+                      <Knob key={k} accent={type.accent} />
+                    ))}
                   </div>
                   <div className="pedal-name">{type.name}</div>
                   <div className="pedal-sub">{type.sub}</div>

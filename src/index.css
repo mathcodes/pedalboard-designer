@@ -69,11 +69,11 @@ html, body, #root { margin: 0; padding: 0; }
 .board-cell.hover-valid { border-color: #7fae4f; background: rgba(127,174,79,0.12); }
 .board-cell.hover-invalid { border-color: #c94a2f; background: rgba(201,74,47,0.12); }
 
-.placed-pedal { position: absolute; transition: left .18s ease, top .18s ease; touch-action: none; cursor: grab; }
+.placed-pedal { position: absolute; transition: left .18s ease, top .18s ease; touch-action: none; cursor: grab; display: flex; align-items: center; justify-content: center; }
 .placed-pedal.dragging { opacity: 0.3; transition: none; z-index: 5; }
 .placed-pedal:active { cursor: grabbing; }
 .pedal-box {
-  position: relative; width: 100%; height: 100%; border-radius: 5px; padding: 8px 6px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; border-radius: 5px; padding: 8px 6px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center;
   background: linear-gradient(160deg, #5c6255, #2c3027); border: 1px solid #20241d; box-shadow: 0 6px 12px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07);
 }
 .pedal-accent { position: absolute; top: 0; left: 8px; right: 8px; height: 3px; border-radius: 0 0 3px 3px; }
